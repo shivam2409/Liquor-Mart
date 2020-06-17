@@ -1,0 +1,34 @@
+{
+  "name": "liquorshop",
+  "version": "1.0.0",
+  "description": "ShoppingSite for Client",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivam2409/Liquor-Mart.git"
+  },
+  "author": "Shivam Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shivam2409/Liquor-Mart/issues"
+  },
+  "homepage": "https://github.com/shivam2409/Liquor-Mart#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.1",
+    "express": "^4.17.1",
+    "gravatar": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.19",
+    "reqest": "0.0.1-security",
+    "validator": "^13.1.1"
+  },
+  "devDependencies": {
+    "concurrency": "^0.1.4",
+    "nodemon": "^2.0.4"
+  }
+}
