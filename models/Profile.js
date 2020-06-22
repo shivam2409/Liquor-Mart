@@ -8,13 +8,10 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
   },
-  favItem: {
+  favItem: [{
     type: String,
-    // unique:true
-  },
-  cartItem: {
-    type: String,
-  },
+    unique: true
+  }],
   address: [
     {
       apartment: {
@@ -40,9 +37,36 @@ const ProfileSchema = new mongoose.Schema({
     },
   ],
   paymentMethod: {
-    creditcard: { type: String },
-    debitCard: { type: String },
-    paypal: { type: String },
+    creditcard: [{
+      number:{
+        type:String
+      },
+      cvv:{
+        type:String
+      },
+      name:{
+        type:String
+      },
+      date:{
+        type: String
+      }
+    }],
+    
+    debitCard: [
+    {
+      number:{
+        type:String
+      },
+      cvv:{
+        type:String
+      },
+      name:{
+        type:String
+      },
+      date:{
+        type: String
+      }
+    }],
   },
 });
 
