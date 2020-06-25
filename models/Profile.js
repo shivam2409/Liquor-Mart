@@ -28,7 +28,7 @@ const ProfileSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      state: {
+      province: {
         type: String,
         required: true,
       },
@@ -41,13 +41,13 @@ const ProfileSchema = new mongoose.Schema({
   paymentMethod: {
     creditcard: [
       {
-        number: {
+        cardNumber: {
           type: String,
         },
         cvv: {
           type: String,
         },
-        name: {
+        nameOnCard: {
           type: String,
         },
         date: {

@@ -70,7 +70,8 @@ router.post(
           res.json({ token });
         }
       );
-      res.send('User Registerd');
+
+      //   res.send('User Registerd');
     } catch (error) {
       console.error(error.message);
       res.status(500).send('Server Error');
