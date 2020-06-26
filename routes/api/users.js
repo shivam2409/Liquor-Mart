@@ -6,6 +6,7 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
 const User = require('../../models/User');
+const Profile = require('../../models/Profile');
 
 // @route POST api/users
 // @desc Register Route
@@ -15,7 +16,7 @@ router.post(
   '/',
   [
     check('name', 'Name is required').notEmpty(),
-    check('email', 'Please enter vslid Email').isEmail(),
+    check('email', 'Please enter valid Email').isEmail(),
     check('password', 'Enter password with 6 or more charactor').isLength({
       min: 6,
     }),
@@ -50,6 +51,14 @@ router.post(
       user.password = await bcrypt.hash(password, salt);
 
       await user.save();
+
+      const profileFields = {};
+      profileFields.user = user.id;
+
+      //Create New Profile
+      profile = new Profile(profileFields);
+      await profile.save();
+
       //Return jsonWebtoken
       //Getting userId
       const payload = {
