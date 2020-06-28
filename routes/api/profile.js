@@ -60,7 +60,7 @@ router.post('/', auth, async (req, res) => {
       return res.json(profile);
     }
     //Create New Profile
-    profile = new Profile(profileFields);
+    // profile = new Profile(profileFields);
     await profile.save();
     res.json(profile);
   } catch (error) {
