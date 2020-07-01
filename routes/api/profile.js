@@ -129,7 +129,7 @@ router.put('/cartItem/:id', async (req, res) => {
       profile.cartItems.unshift({ product: req.product.id });
 
     await profile.save();
-    res.json;
+    res.json(profile.cartItems);
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error');
@@ -160,6 +160,64 @@ router.put('/rmvcartItem/:id', async (req, res) => {
     profile.cartItems.splice(removeIndex, 1);
 
     await profile.save();
+
+    res.json(profile.cartItems);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//@route    PUT api/profile/favItem/:id
+//@desc     Add Product by id
+//@access   Public
+
+router.put('/favItem/:id', async (req, res) => {
+  try {
+    const profile = await Profile.findById(req.params.id);
+
+    //Checking if product is already in favlist
+    if (
+      profile.favItems.filter(
+        ((favItem) => favItem.product.toString() === req.product.id).length > 0
+      )
+    )
+      profile.favItems.unshift({ product: req.product.id });
+
+    await profile.save();
+    res.json(profile.favItems);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//@route    PUT api/profile/favItem/:id
+//@desc     Remove Product by id
+//@access   Public
+
+router.put('/rmvfavItem/:id', async (req, res) => {
+  try {
+    const profile = await Profile.findById(req.params.id);
+    //check if product is fav
+    if (
+      profile.favItems.filter(
+        (favItem) => favItem.product.toString() === req.product.id
+      ).length === 0
+    ) {
+      return res.status(400).json({ msg: 'There is no such Product' });
+    }
+
+    //Remove Index
+
+    const removeIndex = profile.favItems
+      .map((cartItem) => cartItem.product.toString())
+      .indexOf(res.product.id);
+    profile.favItems.splice(removeIndex, 1);
+
+    await profile.save();
+
+    res.json(profile.favItems);
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error');
