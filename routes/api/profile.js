@@ -109,4 +109,61 @@ router.delete('/', auth, async (req, res) => {
   }
 });
 
+//Add and remove from cart
+
+//@route    PUT api/profile/cartItem/:id
+//@desc     Add Product by id
+//@access   Public
+
+router.put('/cartItem/:id', async (req, res) => {
+  try {
+    const profile = await Profile.findById(req.params.id);
+
+    //Checking if product is already in Card
+    if (
+      profile.cartItems.filter(
+        ((cartItem) => cartItem.product.toString() === req.product.id).length >
+          0
+      )
+    )
+      profile.cartItems.unshift({ product: req.product.id });
+
+    await profile.save();
+    res.json;
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//@route    PUT api/profile/cartItem/:id
+//@desc     Remove Product by id
+//@access   Public
+
+router.put('/rmvcartItem/:id', async (req, res) => {
+  try {
+    const profile = await Profile.findById(req.params.id);
+    //check if product is incart
+    if (
+      profile.cartItems.filter(
+        (cartItem) => cartItem.product.toString() === req.product.id
+      ).length === 0
+    ) {
+      return res.status(400).json({ msg: 'There is no such Product' });
+    }
+
+    //Remove Index
+
+    const removeIndex = profile.cartItems
+      .map((cartItem) => cartItem.product.toString())
+      .indexOf(res.product.id);
+    profile.cartItems.splice(removeIndex, 1);
+
+    await profile.save();
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;
