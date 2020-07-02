@@ -29,7 +29,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      const { name, image, proce, size, percentage, type } = req.body;
+      const { name, image, price, size, percentage, type } = req.body;
       //   const prod = await Product.findById(req.prod.id);
       const newProduct = new Product({
         name,
@@ -40,6 +40,8 @@ router.post(
         type,
       });
       const product = await newProduct.save();
+      console.log(product);
+
       res.json(product);
     } catch (error) {
       console.error(error.message);

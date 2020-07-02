@@ -8,10 +8,10 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
   },
-  favItem: [
+  favItems: [
     {
       type: String,
-      unique: true,
+      // unique: true,
     },
   ],
   address: [
@@ -73,7 +73,7 @@ const ProfileSchema = new mongoose.Schema({
       },
     ],
   },
-  cartItem: [
+  cartItems: [
     {
       user: { type: mongoose.Schema.Types.ObjectId, ref: 'product' },
     },

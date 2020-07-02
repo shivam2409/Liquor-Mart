@@ -25,11 +25,7 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  cart: [
-    {
-      user: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
-    },
-  ],
+
   //Avalibility
 });
 
